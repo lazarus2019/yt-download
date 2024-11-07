@@ -9,7 +9,7 @@ export type VideoQueryParams = {
   regionCode?: string; // ex: US, VN, KR, ... reference: https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes#Current_ISO_3166_country_codes
 };
 
-export type DownloadVideoRes = {
+export type DownloadMP3VideoRes = {
   link: string;
   title: string;
   duration: number;

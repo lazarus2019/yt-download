@@ -1,10 +1,11 @@
 import { axiosGGYoutubeQuery } from '@/apis/axios';
 import { VideoQueryParams, VideoQueryRes } from '../types';
 import { Response } from '@/types/common';
+import { youtubeQueryKeys } from '../queryKeys';
 
 const getGGYoutubeVideo = async ({
-  part = 'snippet',
   q,
+  part = 'snippet',
   maxResults = 10,
   regionCode = 'VN',
   type = 'video',
@@ -19,13 +20,12 @@ const getGGYoutubeVideo = async ({
     },
   });
 
-  console.log(data);
   return data.data;
 };
 
 export const getGGYoutubeVideoQuery = (params: VideoQueryParams) => {
   return {
-    queryKey: [],
+    queryKey: youtubeQueryKeys.query(params),
     queryFn: () => getGGYoutubeVideo(params),
   };
 };

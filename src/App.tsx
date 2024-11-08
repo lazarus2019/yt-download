@@ -5,6 +5,7 @@ import { SearchInput } from './components/search/SearchInput';
 import { convertFileSize, convertSecondsToMinutes } from './helpers/common';
 import { getYoutubeMP3Query } from './services/youtube/apis/getYoutubeMP3';
 import { getGGYoutubeVideoQuery } from './services/youtube/apis/getYoutubeVideo';
+import { ConvertSection } from './components/convert/ConvertSection';
 
 function App() {
   const [keyword, setKeyword] = useState('');
@@ -37,6 +38,8 @@ function App() {
       <button onClick={() => setActiveDownload((prev) => !prev)}>
         Download
       </button>
+
+      <ConvertSection />
     </div>
   );
 }

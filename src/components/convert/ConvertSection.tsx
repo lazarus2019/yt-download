@@ -1,15 +1,13 @@
 import { ConvertTab } from './ConvertTab';
 import { YoutubeEmbed } from './YoutubeEmbed';
 
+import classNames from './convert.module.scss';
+
 export const ConvertSection = () => {
   return (
-    <section>
-      <div>
-        <YoutubeEmbed videoId="C_29TAVQrm8" />
-      </div>
-      <div>
-        <ConvertTab />
-      </div>
+    <section className={classNames['convert-section']}>
+      <YoutubeEmbed videoId="C_29TAVQrm8" />
+      <ConvertTab />
     </section>
   );
 };

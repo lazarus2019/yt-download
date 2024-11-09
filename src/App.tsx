@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
-import './App.css';
 import { SearchInput } from './components/search/SearchInput';
 import { convertFileSize, convertSecondsToMinutes } from './helpers/common';
 import { getYoutubeMP3Query } from './services/youtube/apis/getYoutubeMP3';

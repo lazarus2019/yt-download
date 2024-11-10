@@ -12,5 +12,6 @@ export const downloadTypes = [
     label: 'Video',
     icon: 'video',
     type: fileTypes.VIDEO,
+    disabled: true,
   },
 ];

@@ -1,23 +1,29 @@
 import { KeyboardEvent, useState } from 'react';
 
+import classNames from './search.module.scss';
+
 interface SearchInputProps {
   defaultValue?: string;
   placeholder?: string;
-  label: string;
   onSubmit: (value: string) => void;
 }
 
 export const SearchInput = ({
-  label,
   onSubmit,
   defaultValue = '',
   placeholder = 'Enter value',
 }: SearchInputProps) => {
   const [value, setValue] = useState(defaultValue);
 
+  const handleSubmit = () => {
+    if (!value || value.trim() === '') return;
+
+    onSubmit(value);
+  };
+
   const handleEnter = (event: KeyboardEvent) => {
     if (event.key === 'Enter') {
-      onSubmit(value);
+      handleSubmit();
     }
   };
 
@@ -26,14 +32,19 @@ export const SearchInput = ({
   };
 
   return (
-    <div>
-      <label>{label}</label>
-      <input
-        value={value}
-        onChange={handleOnChange}
-        onKeyUp={handleEnter}
-        placeholder={placeholder}
-      />
+    <div className={classNames['search-input-container']}>
+      <div className={classNames['search-input-wrapper']}>
+        <input
+          className={classNames['search-input']}
+          value={value}
+          onChange={handleOnChange}
+          onKeyUp={handleEnter}
+          placeholder={placeholder}
+        />
+      </div>
+      <button className={classNames['search-btn']} onClick={handleSubmit}>
+        Search
+      </button>
     </div>
   );
 };

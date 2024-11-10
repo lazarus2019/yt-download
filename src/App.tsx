@@ -1,42 +1,32 @@
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import { SearchInput } from './components/search/SearchInput';
-import { convertFileSize, convertSecondsToMinutes } from './helpers/common';
-import { getYoutubeMP3Query } from './services/youtube/apis/getYoutubeMP3';
+import { VideoList } from './components/video/VideoList';
 import { getGGYoutubeVideoQuery } from './services/youtube/apis/getYoutubeVideo';
+
+import classNames from './app.module.scss';
 import { ConvertSection } from './components/convert/ConvertSection';
 
 function App() {
   const [keyword, setKeyword] = useState('');
 
-  const [activeDownload, setActiveDownload] = useState(false);
   const { data } = useQuery({
-    ...getGGYoutubeVideoQuery({ q: keyword, regionCode: 'US' }),
+    ...getGGYoutubeVideoQuery({ q: keyword }),
     enabled: !!keyword,
   });
 
-  const { data: downloadData } = useQuery({
-    ...getYoutubeMP3Query('Tc0tLGWIqxA'),
-    enabled: activeDownload,
-  });
-
-  console.log(data, downloadData);
-
-  console.log(
-    convertFileSize(3594994),
-    convertSecondsToMinutes(215.66693938098)
-  );
-
   return (
-    <div>
-      <SearchInput
-        label="Search video"
-        defaultValue={keyword}
-        onSubmit={setKeyword}
-      />
-      <button onClick={() => setActiveDownload((prev) => !prev)}>
-        Download
-      </button>
+    <div className={classNames['app']}>
+      <h1 className={classNames['title']}>
+        Y2Download - Youtube Downloader w/t ads
+      </h1>
+      <div className={classNames['search-input-container']}>
+        <SearchInput defaultValue={keyword} onSubmit={setKeyword} />
+      </div>
+
+      <div className={classNames['video-list-container']}>
+        <VideoList videos={data?.items ?? []} />
+      </div>
 
       <ConvertSection />
     </div>

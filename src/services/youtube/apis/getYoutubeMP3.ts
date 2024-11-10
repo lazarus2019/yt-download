@@ -1,10 +1,9 @@
 import { axiosYoutubeToMP3 } from '@/apis/axios';
-import { Response } from '@/types/common';
-import { DownloadMP3VideoRes } from '../types';
 import { youtubeToMP3QueryKeys } from '../queryKeys';
+import { DownloadMP3VideoRes } from '../types';
 
 const getYoutubeMP3 = async (videoId: string) => {
-  const data = await axiosYoutubeToMP3.get<Response<DownloadMP3VideoRes>>('', {
+  const data = await axiosYoutubeToMP3.get<DownloadMP3VideoRes>('', {
     params: {
       id: videoId,
     },

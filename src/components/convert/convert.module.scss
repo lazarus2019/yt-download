@@ -1,8 +1,99 @@
+// popup
+.overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 24px;
+  pointer-events: none;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+
+  &.active {
+    visibility: visible;
+    pointer-events: all;
+    opacity: 1;
+  }
+}
+
+.convert-container {
+  position: relative;
+  background-color: #fdfdfd;
+  max-width: 600px;
+  width: 100%;
+  padding: 24px 32px;
+  border-radius: 4px;
+
+  .close-btn {
+    margin-top: 20px;
+    margin-left: auto;
+    display: block;
+    padding: 8px 16px;
+    border-radius: 4px;
+    background-color: #eee;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: #dddddd;
+    }
+  }
+
+  .close-popup-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: transparent;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: #dddddd;
+    }
+  }
+}
+
+.convert-btn {
+  margin: 20px auto 0;
+  display: block;
+  color: #fff;
+  padding: 8px 12px;
+  border: 0;
+  border-radius: 4px;
+  background-color: #62c162;
+  transition: background-color 0.3s ease;
+  text-align: center;
+
+  &:hover {
+    background-color: #57af57;
+  }
+}
+
 // Section
 .convert-section {
-  display: grid;
-  grid-template-columns: 30% 70%;
+  display: flex;
+  flex-direction: column;
   gap: 20px;
+}
+.convert-tab {
+  position: relative;
+}
+
+.convert-tab-backdrop {
+  position: absolute;
+  inset: 0;
+  transition: backdrop-filter 0.2s;
+  backdrop-filter: blur(0);
+  pointer-events: none;
+
+  &.active {
+    backdrop-filter: blur(1px);
+    pointer-events: all;
+  }
 }
 
 // Tab
@@ -11,7 +102,8 @@
 }
 
 .tab-trigger {
-  padding: 8px 12px;
+  padding: 12px 0;
+  width: 100px;
   color: #555;
   background-color: #fff;
   border: 1px solid transparent;
@@ -25,13 +117,19 @@
     border-color: #ddd;
     background-color: #eee;
   }
+
+  &.disabled {
+    cursor: not-allowed;
+    color: #999;
+    pointer-events: none;
+  }
 }
 
 .tab-content {
   display: none;
   border-collapse: collapse;
   border-color: #ddd;
-  min-width: 500px;
+  width: 100%;
 
   &.active {
     display: table;
@@ -57,6 +155,7 @@
 .download-btn {
   color: #fff;
   padding: 8px 0;
+  border: 0;
   border-radius: 4px;
   background-color: #62c162;
   transition: background-color 0.3s ease;

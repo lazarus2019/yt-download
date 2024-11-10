@@ -1,4 +1,3 @@
-import { mockDownloadMP3 } from '@/configs/mockData';
 import { getFileTypeLabel } from '@/helpers/video';
 import { ConvertData, FileType } from '@/types/common';
 import { useEffect, useState } from 'react';
@@ -7,7 +6,11 @@ import { downloadTypes, tableConvertHeaders } from './configs';
 import classNames from './convert.module.scss';
 import clsx from 'clsx';
 
-export const ConvertTab = () => {
+interface ConvertTabProps {
+  data: ConvertData[];
+}
+
+export const ConvertTab = ({ data }: ConvertTabProps) => {
   const [tab, setTab] = useState<FileType>(downloadTypes[0].type);
 
   return (
@@ -20,6 +23,7 @@ export const ConvertTab = () => {
             index={item.type}
             onClick={setTab}
             activeIndex={tab}
+            disabled={item.disabled}
           />
         ))}
       </div>
@@ -29,7 +33,7 @@ export const ConvertTab = () => {
           key={`tab-content-${item.type}`}
           index={item.type}
           activeIndex={tab}
-          data={mockDownloadMP3} // replace with passing data
+          data={data} // replace with passing data
         />
       ))}
     </div>
@@ -41,6 +45,7 @@ interface TabTriggerProps {
   index: FileType;
   onClick: (index: FileType) => void;
   activeIndex: FileType;
+  disabled?: boolean;
 }
 
 const TabTrigger = ({
@@ -48,6 +53,7 @@ const TabTrigger = ({
   activeIndex,
   label,
   onClick,
+  disabled = false,
 }: TabTriggerProps) => {
   const handleClick = () => {
     if (activeIndex === index) return;
@@ -57,6 +63,7 @@ const TabTrigger = ({
     <button
       className={clsx(classNames['tab-trigger'], {
         [classNames['active']]: activeIndex === index,
+        [classNames['disabled']]: disabled,
       })}
       onClick={handleClick}
     >

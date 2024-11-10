@@ -1,0 +1,51 @@
+// list
+.video-list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(200px, 1fr));
+  gap: 48px;
+}
+
+// item
+.video-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .thumbnail {
+    width: 100%;
+  }
+
+  .title {
+    margin-top: 12px;
+    font-size: 18px;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .download-btn {
+    margin: 12px auto 0;
+    display: block;
+    user-select: none;
+    cursor: pointer;
+
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 4px;
+    background-color: #62c162;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    text-align: center;
+    border: 0;
+
+    &:hover {
+      background-color: #57af57;
+    }
+  }
+}
+
+.no-video {
+  text-align: center;
+}

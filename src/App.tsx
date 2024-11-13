@@ -1,14 +1,8 @@
-import { useQuery } from '@tanstack/react-query';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { SearchInput } from './components/search/SearchInput';
-import { VideoList } from './components/video/VideoList';
-import { getGGYoutubeVideoQuery } from './services/youtube/apis/getYoutubeVideo';
 
 import classNames from './app.module.scss';
 import { ConvertSection } from './components/convert/ConvertSection';
-import axios from 'axios';
-import { SuggestionList } from './components/search/SuggestionList';
-import { getYoutubeSuggestionQuery } from './services/youtube/apis/getYoutubeSuggestion';
 
 function App() {
   const [keyword, setKeyword] = useState('');
@@ -17,11 +11,6 @@ function App() {
   //   ...getGGYoutubeVideoQuery({ q: keyword }),
   //   enabled: !!keyword,
   // });
-
-  const { data: suggestionData } = useQuery({
-    ...getYoutubeSuggestionQuery(keyword),
-    enabled: !!keyword,
-  });
 
   // useEffect(() => {
   //   if (keyword === '') return;
@@ -40,10 +29,6 @@ function App() {
       </h1>
       <div className={classNames['search-input-container']}>
         <SearchInput defaultValue={keyword} onSubmit={setKeyword} />
-        <SuggestionList
-          onClick={(value) => setKeyword(value)}
-          suggestions={suggestionData ?? []}
-        />
       </div>
 
       <div className={classNames['video-list-container']}>

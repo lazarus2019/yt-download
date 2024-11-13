@@ -1,6 +1,7 @@
 $borderRadius: 4px;
 
 .search-input-container {
+  position: relative;
   display: flex;
   height: 50px;
   max-width: 600px;
@@ -38,5 +39,32 @@ $borderRadius: 4px;
 
   &:hover {
     background-color: #cd0b45;
+  }
+}
+
+// suggestion
+.suggestion-list {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  top: 100%;
+}
+
+.suggestion-item {
+  padding: 8px 12px;
+  text-align: left;
+  background-color: #efefef;
+
+  &.active {
+    background-color: #ddd;
+  }
+
+  &:hover {
+    background-color: #ddd;
+
+    ~ .suggestion-item {
+      background-color: #efefef;
+    }
   }
 }

@@ -16,7 +16,12 @@ export const SuggestionList = ({
   return (
     <div className={classNames['suggestion-list']}>
       {suggestions.map((suggestion, index) => (
-        <button onClick={() => onClick(suggestion)}>{suggestion}</button>
+        <button
+          className={classNames['suggestion-item']}
+          onClick={() => onClick(suggestion)}
+        >
+          {suggestion}
+        </button>
       ))}
     </div>
   );

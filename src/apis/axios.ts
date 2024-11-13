@@ -54,4 +54,17 @@ const axiosGGYoutubeQuery = axiosInstance.create({
   },
 });
 
-export { axiosYoutubeToMP3, axiosYoutubeQuery, axiosGGYoutubeQuery };
+// setup APIs connect to custom Server
+const axiosYoutubeCustom = axiosInstance.create({
+  baseURL: BASE_URL.youtubeCustom,
+  headers: {
+    Accept: 'application/json',
+  },
+});
+
+export {
+  axiosYoutubeToMP3,
+  axiosYoutubeQuery,
+  axiosGGYoutubeQuery,
+  axiosYoutubeCustom,
+};

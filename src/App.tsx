@@ -1,26 +1,19 @@
 import { useState } from 'react';
 import { SearchInput } from './components/search/SearchInput';
 
+import { useQuery } from '@tanstack/react-query';
 import classNames from './app.module.scss';
 import { ConvertSection } from './components/convert/ConvertSection';
+import { VideoList } from './components/video/VideoList';
+import { getGGYoutubeVideoQuery } from './services/youtube/apis/getYoutubeVideo';
 
 function App() {
   const [keyword, setKeyword] = useState('');
 
-  // const { data } = useQuery({
-  //   ...getGGYoutubeVideoQuery({ q: keyword }),
-  //   enabled: !!keyword,
-  // });
-
-  // useEffect(() => {
-  //   if (keyword === '') return;
-
-  //   axios.get('http://localhost:4000/search-yt', {
-  //     params: {
-  //       q: keyword,
-  //     },
-  //   });
-  // }, [keyword]);
+  const { data } = useQuery({
+    ...getGGYoutubeVideoQuery({ q: keyword }),
+    enabled: !!keyword,
+  });
 
   return (
     <div className={classNames['app']}>
@@ -32,7 +25,7 @@ function App() {
       </div>
 
       <div className={classNames['video-list-container']}>
-        {/* <VideoList videos={data?.items ?? []} /> */}
+        <VideoList videos={data?.items ?? []} />
       </div>
 
       <ConvertSection />

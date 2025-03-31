@@ -7,6 +7,8 @@ import { ConvertSection } from './components/convert/ConvertSection';
 import { VideoList } from './components/video/VideoList';
 import { getGGYoutubeVideoQuery } from './services/youtube/apis/getYoutubeVideo';
 
+console.log(import.meta.env.VITE_SAMPLE_YOUTUBE_URL);
+
 function App() {
   const [keyword, setKeyword] = useState('');
 

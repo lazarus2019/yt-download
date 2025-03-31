@@ -1,8 +1,5 @@
 name: Deploy React + Vite to Github Pages
 
-env:
-  VITE_SAMPLE_YOUTUBE_URL: 'https://www.youtube.com/watch?v=Tc0tLGWIqxA'
-
 on: 
   # workflow_dispatch: # read more: https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows#workflow_dispatch
   push: 
@@ -40,6 +37,14 @@ jobs:
       - name: Lint and test
         run: bun run lint
         # run: bun run test
+
+            # Set the environment variables from the .env.production file
+      - name: Set environment variables
+        run: |
+          echo "Loading environment variables from .env.production"
+          set -o allexport
+          source .env.production
+          set +o allexport
 
       # Build the project
       - name: Build

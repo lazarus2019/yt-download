@@ -1,5 +1,8 @@
 name: Deploy React + Vite to Github Pages
 
+env:
+  VITE_SAMPLE_YOUTUBE_URL: 'https://www.youtube.com/watch?v=Tc0tLGWIqxA'
+
 on: 
   # workflow_dispatch: # read more: https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows#workflow_dispatch
   push: 

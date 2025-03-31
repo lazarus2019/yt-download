@@ -1,0 +1,51 @@
+name: Deploy React + Vite to Github Pages
+
+on: 
+  # workflow_dispatch: # read more: https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows#workflow_dispatch
+  push: 
+    branches:
+      - production
+
+jobs:
+  build-deploy:
+    name: Build and deploy
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x, 22.x]
+        bun-version: [1.2.7]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+      # Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Setup Node.js/Bun
+      - name: Setup Node.js/Bun
+        # uses: actions/setup-node@v4
+        uses: oven-sh/setup-bun@v2 # using bun instead of node: readmore (https://bun.sh/guides/runtime/cicd)
+        with:
+          bun-version: ${{matrix.bun-version}}
+          cache: 'bun'
+        
+      # Install Dependencies
+      - name: Install Dependencies
+        run: bun install
+
+      # Run lint and test
+      - name: Lint and test
+        run: bun run lint
+        # run: bun run test
+
+      # Build the project
+      - name: Build
+        run: bun run build
+
+      # Deploy to Github Pages
+      - name: Deploy to Github Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public

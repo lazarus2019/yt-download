@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import classNames from './search.module.scss';
 
 interface SuggestionListProps {
@@ -11,11 +9,9 @@ export const SuggestionList = ({
   suggestions,
   onClick,
 }: SuggestionListProps) => {
-  const [selectedIndex, setSelectedIndex] = useState(0);
-
   return (
     <div className={classNames['suggestion-list']}>
-      {suggestions.map((suggestion, index) => (
+      {suggestions.map((suggestion) => (
         <button
           className={classNames['suggestion-item']}
           onClick={() => onClick(suggestion)}

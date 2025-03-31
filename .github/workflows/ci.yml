@@ -23,18 +23,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
-        # uses: oven-sh/setup-bun@v2 # using bun instead of node: readmore (https://bun.sh/guides/runtime/cicd)
+        # uses: actions/setup-node@v4
+        uses: oven-sh/setup-bun@v2 # using bun instead of node: readmore (https://bun.sh/guides/runtime/cicd)
         with:
           node-version: ${{ matrix.node-version }}
-          # bun-version: ${{matrix.bun-version}}
-          # cache: 'npm'
-      - run: npm i
-      - run: npm run build --if-present
+          bun-version: ${{matrix.bun-version}}
+          cache: 'bun'
+      # - run: npm i
+      # - run: npm run build --if-present
       # - run: npm test
-      # - run: bun install
-      # - run: bun run lint
-      # - run: bun run build --node
+      - run: bun install
+      - run: bun run lint
+      - run: bun run build
       - run:  |
           echo "The job_id is: $GITHUB_JOB"   # reference the default environment variables
           echo "The id of this action is: $GITHUB_ACTION"   # reference the default environment variables
